@@ -25,7 +25,7 @@ class Book(models.Model):
     retal_period = models.IntegerField(null=True, blank=True)
     active = models.BooleanField(default=True)
     status = models.CharField(max_length=50, choices=status_book, null=True, blank=True)
-    categorie = models.ForeignKey(Categorie, on_delete=models.PROTECT, null=True, blank=True)
+    category = models.ForeignKey(Categorie, on_delete=models.PROTECT, null=True, blank=True)
 
     def __str__(self):
         return self.title
