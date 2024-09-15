@@ -82,13 +82,9 @@
             <!-- /.card-header -->
             <!-- form start -->
             <form method="POST" enctype="multipart/form-data"  > 
+              {% csrf_token %}
               <div class="card-body"> 
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <input type="text" class="form-control">
-                <small id='totalrente' class="form-text text-muted"></small>
+                {{form}}
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
@@ -104,21 +100,13 @@
           <!-- تصنيفات-->
   
           <div class="row justify-content-center mb-3">
-            <div class="col-4 ">
+            <div class="col-6">
               <ul class="nav">
-            
+                {% for category in categories %}
                 <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">تاريخ</a>
+                  <a id="" class="nav-link bg-primary" href="#">{{category.name}}</a>
                 </li>
-                <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">فن</a>
-                </li>
-                <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">ثقافة</a>
-                </li>
-                <li class="nav-item ">
-                  <a id="" class="nav-link bg-primary" href="#">رومانسية</a>
-                </li>
+                {% endfor %}
               </ul>
             </div>
           </div>
@@ -165,8 +153,13 @@
                         <!-- /.col -->
                     <div class="col-sm-4 border-right">
                       <div class="description-block">
+                        {% if book.price %}
                         <h5 class="description-header">{{ book.price }}DH</h5>
                         <span class="description-text">السعر</span>
+                        {% elif book.rental_bookprice %}
+                        <h5 class="description-header">{{ book.price }}DH</h5>
+                        <span class="description-text">Per day</span>
+                        {% endif %}
                       </div>
                       <!-- /.description-block -->
                     </div>
