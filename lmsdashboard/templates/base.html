@@ -28,9 +28,44 @@
     {% include "parts/footer.html" %}
     </div>
 
+<!-- jQuery CDN -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+    $(document).ready(function() {
+        $("#rentaldays").keyup (function(){
+            $("#totalrental").val($("#rentaldays").val()*$("#rentalprice").val())
+        })
+
+        // Initially hide the category section
+        $("#cl-category").hide();
+
+        // Show the category section on button click
+        $("#addcat").click(function() {
+            $("#cl-category").show();
+        });
+
+        // Hide the category section on button click
+        $("#backcat").click(function() {
+            $("#cl-category").hide();
+        });
+
+        // Loop through the books and bind click events for each book category and status
+        {% for book in books %}
+        $(".cat{{ book.category.id }}").click(function() {
+            $(".bookhide").hide(); // Hide all books
+            $(".book{{ book.category.id }}").show(); // Show books of the clicked category
+        });
+
+        $(".status{{ book.status }}").click(function() {
+            $(".bookhide").hide(); // Hide all books
+            $(".book{{ book.status }}").show(); // Show books of the clicked status
+        });
+        {% endfor %}
+    });
+</script>
+
 <!-- REQUIRED SCRIPTS -->
 <script src="{% static 'plugins/jquery_datepacker/jquery_ui.js' %}"></script>
-
 <!-- jQuery -->
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 <!-- Bootstrap -->
@@ -153,7 +188,7 @@
         type: 'pie',
         data: {
         datasets: [{
-            data: ['35','25','40'],
+            data: ['{{ AvailableBooks }}','{{ SoldBooks }}','{{ RentalBooks }}'],
             backgroundColor :["#27c100","#f3545d","#fdaf4b"],
             borderWidth: 10,
             
