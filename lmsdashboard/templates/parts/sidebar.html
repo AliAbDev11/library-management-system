@@ -1,7 +1,8 @@
+  {% load static %}
   <!-- Main Sidebar Container -->
   <aside style="position: fixed;" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="#" class="brand-link">
+    <a href="{% url 'index' %}" class="brand-link">
       <span class="brand-text font-weight-light">LBS</span>
     </a>
 
@@ -12,7 +13,7 @@
         <div class="image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Ali AB</a>
+          <span class="d-block text-white">Ali AB</span>
         </div>
       </div>
 
@@ -21,7 +22,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
           <li class="nav-item">
-            <a href="#" class="nav-link">
+            <a href="{% url 'books' %}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 New Books
@@ -46,11 +47,13 @@
                     </a>
                   </li> 
               <form id="cat" method="POST">
-             
-                  <input type="text" class="form-control">
-
+                {% csrf_token %}
+                <div id="cl-category">
+                  {% comment %} <input type="text" class="form-control"> {% endcomment %}
+                  {{ CategoryForm }}
                   <button type="submit" class="btn btn-success">save</button>
                   <button id="backcat" class="btn btn-primary ">back</button>
+                </div>
               </form>  
                 {% for category in categories %}
                 <li style="cursor: pointer;" class="nav-item">
@@ -65,19 +68,19 @@
 
           <li class="nav-header">الكتب المستعارة</li>
           
-          <li style="cursor: pointer;" class="nav-item">
+          <li style="cursor: pointer;" class="nav-item statussold">
             <a id="statusSold" class="nav-link">
               <i class="nav-icon far fa-circle text-danger"></i>
               <p class="text">تم بيعه</p>
             </a>
           </li>
-          <li style="cursor: pointer;" class="nav-item">
+          <li style="cursor: pointer;" class="nav-item statusrental">
             <a id="" class="nav-link">
               <i class="nav-icon far fa-circle text-warning"></i>
               <p>تم استعارته</p>
             </a>
           </li>
-          <li style="cursor: pointer;" class="nav-item">
+          <li style="cursor: pointer;" class="nav-item statusavailable">
             <a id="" class="nav-link">
               <i class="nav-icon far fa-circle text-info"></i>
               <p>متاح</p>
