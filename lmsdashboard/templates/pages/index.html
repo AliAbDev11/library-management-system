@@ -44,7 +44,7 @@
                 <div class="card-body">
                   <div class="d-flex">
                     <p class="d-flex flex-column">
-                      <span id="totalsalarys" class="text-bold text-lg">$250</span><br></p>
+                      <span id="totalsalarys" class="text-bold text-lg"></span><br></p>
                   </div>
                   <!-- /.d-flex -->
   
@@ -157,7 +157,7 @@
                         <h5 class="description-header">{{ book.price }}DH</h5>
                         <span class="description-text">السعر</span>
                         {% elif book.rental_bookprice %}
-                        <h5 class="description-header">{{ book.price }}DH</h5>
+                        <h5 class="description-header">{{ book.rental_bookprice }}DH</h5>
                         <span class="description-text">Per day</span>
                         {% endif %}
                       </div>
@@ -200,4 +200,29 @@
   </div>
       <!-- /.content -->
 </div>
+{% comment %} Total Price {% endcomment %}
+{% for book in books %}
+  {% if book.price != None and book.status == 'sold' %} 
+    <p class="cl-totalprice"> {{ book.price }} </p>
+  {% endif %}
+  {% if book.total_rental != None and book.status == 'rental' %}
+    <p class="cl-totalprice"> {{ book.total_rental }} </p>
+  {% endif %}
+{% endfor %}
+
+{% comment %} Total Rental books price {% endcomment %}
+{% for book in books %}
+  {% if book.total_rental != None and book.status == 'rental' %}
+    <p class="cl-slryrental">{{ book.total_rental }}</p>
+  {% endif %}
+{% endfor %}
+<p class="cl-salaryrental"></p>
+
+{% comment %} Total sold books price {% endcomment %}
+{% for book in books %}
+  {% if book.price != None and book.status == 'sold' %}
+    <p class="cl-slrysold">{{ book.price }}</p>
+  {% endif %}
+{% endfor %}
+<p class="cl-salarysold"></p>
 {% endblock content %}
