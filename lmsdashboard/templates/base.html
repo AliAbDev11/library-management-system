@@ -7,12 +7,12 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge">
   
     <title>LBS</title>
-    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
-
     <!-- Font Awesome Icons -->
-    <link rel="stylesheet" href="{% static 'plugins/jquery_datepacker/jquery_ui.css' %}">
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css'%}">
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.css'%}">
     <!-- IonIcons -->
-    <link rel="stylesheet" href="{% static 'http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css' %}">
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{% static 'dist/css/adminlte_ar.min.css' %}">
     <!-- Google Font: Source Sans Pro -->
@@ -32,6 +32,34 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
+        //Total (Solde price + Rental price)
+        var total = 0;
+        $('.cl-totalprice').each(function() {
+            var price = $(this).text().replace(/[^0-9.-]+/g,"");
+            total += parseInt(price, 10);  
+        });
+        $('#totalsalarys').text('$' + total);
+
+        //Total Rental price:
+        var totalR = 0;
+        $(".cl-slryrental").each(function() {
+            $(this).hide()
+            var salaryR = $(this).text()
+            totalR += parseInt(salaryR)
+        });
+        $(".cl-salaryrental").text(totalR)
+        $(".cl-salaryrental").hide()
+        
+        //Total Sold price:
+        var totalS = 0;
+        $(".cl-slrysold").each(function() {
+            $(this).hide()
+            var salaryS = $(this).text()
+            totalS += parseInt(salaryS)
+        });
+        $(".cl-salarysold").text(totalS)
+        $(".cl-salarysold").hide()
+
         $("#rentaldays").keyup (function(){
             $("#totalrental").val($("#rentaldays").val()*$("#rentalprice").val())
         })
@@ -64,8 +92,6 @@
     });
 </script>
 
-<!-- REQUIRED SCRIPTS -->
-<script src="{% static 'plugins/jquery_datepacker/jquery_ui.js' %}"></script>
 <!-- jQuery -->
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
 <!-- Bootstrap -->
@@ -121,14 +147,14 @@
             backgroundColor: '#007bff',
             borderColor    : '#007bff',
             data           : [ 
-                '50',
+                $(".cl-salarysold").text()
             ]
             },
             {
             backgroundColor: '#ced4da',
             borderColor    : '#ced4da',
             data           : [ 
-                    '30',
+                $(".cl-salaryrental").text()
             ]
             }
         ]
