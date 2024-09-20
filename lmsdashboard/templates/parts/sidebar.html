@@ -56,7 +56,7 @@
                 </div>
               </form>  
                 {% for category in categories %}
-                <li style="cursor: pointer;" class="nav-item">
+                <li style="cursor: pointer;" class="nav-item category{{ category.id }}">
                   <a id="" class="nav-link">
                     <i class="far fa-circle nav-icon"></i>
                     <p>{{ category.name }}</p>
@@ -84,6 +84,12 @@
             <a id="" class="nav-link">
               <i class="nav-icon far fa-circle text-info"></i>
               <p>متاح</p>
+            </a>
+          </li>
+          <li style="cursor: pointer;" class="nav-item">
+            <a id="" class="nav-link">
+              <i class="nav-icon far fa-circle text-success"></i>
+              <p>All</p>
             </a>
           </li>
         </ul>
