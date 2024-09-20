@@ -79,7 +79,7 @@
 
         // Loop through the books and bind click events for each book category and status
         {% for book in books %}
-        $(".cat{{ book.category.id }}").click(function() {
+        $(".category{{ book.category.id }}").click(function() {
             $(".bookhide").hide(); // Hide all books
             $(".book{{ book.category.id }}").show(); // Show books of the clicked category
         });
