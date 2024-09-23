@@ -32,7 +32,9 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
     $(document).ready(function() {
-        //Total (Solde price + Rental price)
+        // Initially hide the 'no books found' message
+        $("#noBooksMessage").hide();
+        // Total (Solde price + Rental price)
         var total = 0;
         $('.cl-totalprice').each(function() {
             var price = $(this).text().replace(/[^0-9.-]+/g,"");
@@ -40,29 +42,27 @@
         });
         $('#totalsalarys').text('$' + total);
 
-        //Total Rental price:
+        // Total Rental price:
         var totalR = 0;
         $(".cl-slryrental").each(function() {
-            $(this).hide()
-            var salaryR = $(this).text()
-            totalR += parseInt(salaryR)
+            $(this).hide();
+            var salaryR = $(this).text();
+            totalR += parseInt(salaryR);
         });
-        $(".cl-salaryrental").text(totalR)
-        $(".cl-salaryrental").hide()
-        
-        //Total Sold price:
+        $(".cl-salaryrental").text(totalR).hide();
+
+        // Total Sold price:
         var totalS = 0;
         $(".cl-slrysold").each(function() {
-            $(this).hide()
-            var salaryS = $(this).text()
-            totalS += parseInt(salaryS)
+            $(this).hide();
+            var salaryS = $(this).text();
+            totalS += parseInt(salaryS);
         });
-        $(".cl-salarysold").text(totalS)
-        $(".cl-salarysold").hide()
+        $(".cl-salarysold").text(totalS).hide();
 
-        $("#rentaldays").keyup (function(){
-            $("#totalrental").val($("#rentaldays").val()*$("#rentalprice").val())
-        })
+        $("#rentaldays").keyup(function() {
+            $("#totalrental").val($("#rentaldays").val() * $("#rentalprice").val());
+        });
 
         // Initially hide the category section
         $("#cl-category").hide();
@@ -77,20 +77,44 @@
             $("#cl-category").hide();
         });
 
-        // Loop through the books and bind click events for each book category and status
-        {% for book in books %}
-        $(".category{{ book.category.id }}").click(function() {
+        // Function to check if there are visible books and show the 'No books found' message if necessary
+        function checkIfBooksFound() {
+            if ($(".bookhide:visible").length === 0) {
+                $("#noBooksMessage").show(); // Show 'No books found' message
+            } else {
+                $("#noBooksMessage").hide(); // Hide the message
+            }
+        }
+
+        // Handle book status filtering
+        $("#statusAvailable").click(function() {
             $(".bookhide").hide(); // Hide all books
-            $(".book{{ book.category.id }}").show(); // Show books of the clicked category
+            $(".bookavailable").show(); // Show books with 'available' status
+            checkIfBooksFound(); // Check if any books are visible
         });
 
-        $(".status{{ book.status }}").click(function() {
+        $("#statusRental").click(function() {
             $(".bookhide").hide(); // Hide all books
-            $(".book{{ book.status }}").show(); // Show books of the clicked status
+            $(".bookrental").show(); // Show books with 'rental' status
+            checkIfBooksFound(); // Check if any books are visible
         });
-        {% endfor %}
+
+        $("#statusSold").click(function() {
+            $(".bookhide").hide(); // Hide all books
+            $(".booksold").show(); // Show books with 'sold' status
+            checkIfBooksFound(); // Check if any books are visible
+        });
+
+        $("#statusAll").click(function() {
+            $(".bookhide").show(); // Show all books
+            $("#noBooksMessage").hide(); // Hide 'No books found' message
+        });
+
+        // Execute the function on page load to handle initial book visibility
+        checkIfBooksFound();
     });
 </script>
+
 
 <!-- jQuery -->
 <script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
@@ -137,7 +161,7 @@
         labels  : [
             
 
-            'تفاصيل الارباح',
+            'Earnings details',
 
         ],
 

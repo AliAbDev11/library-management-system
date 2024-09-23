@@ -1,100 +1,92 @@
-  {% load static %}
-  <!-- Main Sidebar Container -->
-  <aside style="position: fixed;" class="main-sidebar sidebar-dark-primary elevation-4">
+{% load static %}
+<!-- Main Sidebar Container -->
+<aside style="position: fixed;" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{% url 'index' %}" class="brand-link">
-      <span class="brand-text font-weight-light">LBS</span>
+        <span class="brand-text font-weight-light">LBS</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
-      <!-- Sidebar user panel (optional) -->
-      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
-        <div class="image">
+        <!-- Sidebar user panel (optional) -->
+        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+            <div class="image"></div>
+            <div class="info">
+                <span class="d-block text-white">Ali AB</span>
+            </div>
         </div>
-        <div class="info">
-          <span class="d-block text-white">Ali AB</span>
-        </div>
-      </div>
 
-      <!-- Sidebar Menu -->
-      <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-
-          <li class="nav-item">
-            <a href="{% url 'books' %}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                New Books
-              </p>
-            </a>
-          </li>
-          <li class="nav-item has-treeview">
-            <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-copy"></i>
-              <p>
-                Category
-                <i class="fas fa-angle-left right"></i>
-                
-              </p>
-            </a>
-            <ul class="nav nav-treeview">
-              
-                  <li class="nav-item">
-                    <a id="addcat" href="#" class="nav-link">
-                        <i class="fa fa-plus "></i>
-                        <p  class="text-light"> Add New </p>
+        <!-- Sidebar Menu -->
+        <nav class="mt-2">
+            <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <li class="nav-item">
+                    <a href="{% url 'books' %}" class="nav-link">
+                        <i class="nav-icon fas fa-th"></i>
+                        <p>New Books</p>
                     </a>
-                  </li> 
-              <form id="cat" method="POST">
-                {% csrf_token %}
-                <div id="cl-category">
-                  {% comment %} <input type="text" class="form-control"> {% endcomment %}
-                  {{ CategoryForm }}
-                  <button type="submit" class="btn btn-success">save</button>
-                  <button id="backcat" class="btn btn-primary ">back</button>
-                </div>
-              </form>  
-                {% for category in categories %}
-                <li style="cursor: pointer;" class="nav-item category{{ category.id }}">
-                  <a id="" class="nav-link">
-                    <i class="far fa-circle nav-icon"></i>
-                    <p>{{ category.name }}</p>
-                  </a>
                 </li>
-                {% endfor %}
-            </ul>
-          </li>
+                <li class="nav-item has-treeview">
+                    <a href="#" class="nav-link">
+                        <i class="nav-icon fas fa-copy"></i>
+                        <p>
+                            Category
+                            <i class="fas fa-angle-left right"></i>
+                        </p>
+                    </a>
+                    <ul class="nav nav-treeview">
+                        <li class="nav-item">
+                            <a id="addcat" href="#" class="nav-link">
+                                <i class="fa fa-plus "></i>
+                                <p class="text-light"> Add New </p>
+                            </a>
+                        </li>
+                        <form id="cat" method="POST">
+                            {% csrf_token %}
+                            <div id="cl-category">
+                                {{ CategoryForm }}
+                                <button type="submit" class="btn btn-success">save</button>
+                                <button id="backcat" class="btn btn-primary ">back</button>
+                            </div>
+                        </form>
+                        {% for category in categories %}
+                        <li style="cursor: pointer;" class="nav-item category{{ category.id }}">
+                            <a class="nav-link">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>{{ category.name }}</p>
+                            </a>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </li>
 
-          <li class="nav-header">الكتب المستعارة</li>
-          
-          <li style="cursor: pointer;" class="nav-item statussold">
-            <a id="statusSold" class="nav-link">
-              <i class="nav-icon far fa-circle text-danger"></i>
-              <p class="text">تم بيعه</p>
-            </a>
-          </li>
-          <li style="cursor: pointer;" class="nav-item statusrental">
-            <a id="" class="nav-link">
-              <i class="nav-icon far fa-circle text-warning"></i>
-              <p>تم استعارته</p>
-            </a>
-          </li>
-          <li style="cursor: pointer;" class="nav-item statusavailable">
-            <a id="" class="nav-link">
-              <i class="nav-icon far fa-circle text-info"></i>
-              <p>متاح</p>
-            </a>
-          </li>
-          <li style="cursor: pointer;" class="nav-item">
-            <a id="" class="nav-link">
-              <i class="nav-icon far fa-circle text-success"></i>
-              <p>All</p>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- /.sidebar-menu -->
+                <li class="nav-header">Book Status</li>
+                <li style="cursor: pointer;" class="nav-item statussold">
+                    <a id="statusSold" class="nav-link">
+                        <i class="nav-icon far fa-circle text-danger"></i>
+                        <p class="text">Sold out</p>
+                    </a>
+                </li>
+                <li style="cursor: pointer;" class="nav-item statusrental">
+                    <a id="statusRental" class="nav-link">
+                        <i class="nav-icon far fa-circle text-warning"></i>
+                        <p>Rented</p>
+                    </a>
+                </li>
+                <li style="cursor: pointer;" class="nav-item statusavailable">
+                    <a id="statusAvailable" class="nav-link">
+                        <i class="nav-icon far fa-circle text-info"></i>
+                        <p>Available</p>
+                    </a>
+                </li>
+                <li style="cursor: pointer;" class="nav-item">
+                    <a id="statusAll" class="nav-link">
+                        <i class="nav-icon far fa-circle text-success"></i>
+                        <p>All</p>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.sidebar-menu -->
     </div>
     <!-- /.sidebar -->
-  </aside>
+</aside>

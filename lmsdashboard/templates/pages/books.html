@@ -8,7 +8,7 @@
   
               <div class="row mb-2">
                 <div class="col-sm-6">
-                  <h1>الكتب</h1>
+                  <h1>Books</h1>
                 </div>
   
               </div>
@@ -31,10 +31,10 @@
                         <div class="row">
                           <div class="col-7">
                             <h2 class="lead"><b>{{ book.title }}</b></h2>
-                            <ul class="  fa-ul text-muted">
-                              <li class="small"><span class="fa-li"></span>الحالة: {{ book.status }}</li>
+                            <ul class="fa-ul text-muted">
+                              <li class="small"><span class="fa-li"></span>Status: {{ book.status }}</li>
                               {% if book.price %}
-                              <li class="small"><span class="fa-li"></span>السعر: {{ book.price }}</li>
+                              <li class="small"><span class="fa-li"></span>Price: {{ book.price }}</li>
                               {% elif book.rental_bookprice %}
                               <li class="small"><span class="fa-li"></span>Per Day: {{ book.rental_bookprice }}</li>
                               {% endif %}
@@ -55,7 +55,7 @@
                             <i class="fas fa-trash"></i>
                           </a>
                           <a href="{% url 'update' book.id %}" class="btn btn-sm btn-primary">
-                            <i class="fas fa-book"></i> تعديل
+                            <i class="fas fa-book"></i> Update
                           </a>
                         </div>
                       </div>
@@ -64,7 +64,11 @@
                   </div>
                   <!-- نهاية الكتاب -->
                   {% endfor %}
+                  <!-- No Books Found Message (hidden by default) -->
                 </div>
+              </div>
+              <div id="noBooksMessage" class="cl-ntfoundbook" style="display:None;">
+                No books found.
               </div>
               <!-- /.card-body -->
   
