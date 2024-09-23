@@ -21,8 +21,8 @@ class BookForm(forms.ModelForm):
             'pages':forms.NumberInput(attrs={'class':'form-control'}),
             'price':forms.NumberInput(attrs={'class':'form-control'}),
             'rental_bookprice':forms.NumberInput(attrs={'class':'form-control', 'id':'rentalprice'}),
-            'retal_period':forms.NumberInput(attrs={'class':'form-control', 'id':'rentaldays'}),
-            'total_rental':forms.NumberInput(attrs={'class':'form-control', 'id':'totalrental'}),
+            'rental_period':forms.NumberInput(attrs={'class':'form-control', 'id':'rentaldays'}),
+            'total_rental':forms.NumberInput(attrs={'class':'form-control', 'id':'totalrental', 'readonly': 'readonly'}),
             'status':forms.Select(attrs={'class':'form-control'}),
             'category':forms.Select(attrs={'class':'form-control'}),
         }
