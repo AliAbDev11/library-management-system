@@ -9,21 +9,33 @@ def base(request):
 def index(request):
     if request.method == 'POST':
         add_book = BookForm(request.POST, request.FILES)
+        add_category = CategoryForm(request.POST)
+
+        # Check if the book form is valid
         if add_book.is_valid():
             add_book.save()
-        add_category = CategoryForm(request.POST)
+            return redirect('index')  # Redirect after successful book submission
+
+        # Check if the category form is valid
         if add_category.is_valid():
             add_category.save()
+            return redirect('index')  # Redirect after successful category submission
+
+    else:
+        add_book = BookForm()  # Initialize empty forms for GET request
+        add_category = CategoryForm()
+
     context = {
-        'categories':Category.objects.all(),
+        'categories': Category.objects.all(),
         'books': Book.objects.all(),
-        'form':BookForm(),
-        'CategoryForm':CategoryForm(),
-        'AllBooks':Book.objects.filter(active=True).count(),
-        'SoldBooks':Book.objects.filter(status='sold').count(),
-        'RentalBooks':Book.objects.filter(status='rental').count(),
-        'AvailableBooks':Book.objects.filter(status='available').count(),
+        'form': add_book,
+        'CategoryForm': add_category,
+        'AllBooks': Book.objects.filter(active=True).count(),
+        'SoldBooks': Book.objects.filter(status='sold').count(),
+        'RentalBooks': Book.objects.filter(status='rental').count(),
+        'AvailableBooks': Book.objects.filter(status='available').count(),
     }
+    
     return render(request, 'pages/index.html', context)
 
 def books(request):
