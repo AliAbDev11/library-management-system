@@ -1,6 +1,6 @@
 {% load static %}
 <!DOCTYPE html>
-<html  lang="ar">
+<html  lang="en">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -18,7 +18,7 @@
     <!-- Google Font: Source Sans Pro -->
     <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
-<body dir="rtl" class="hold-transition sidebar-mini">
+<body dir="ltr" class="hold-transition sidebar-header sidebar-mini">
     {% include "parts/nav.html" %}
     {% include "parts/sidebar.html" %}
     <!-- content -->
@@ -40,7 +40,7 @@
             var price = $(this).text().replace(/[^0-9.-]+/g,"");
             total += parseInt(price, 10);  
         });
-        $('#totalsalarys').text('$' + total);
+        $('#totalsalarys').text('Total Profit is: ' + total + '$');
 
         // Total Rental price:
         var totalR = 0;
