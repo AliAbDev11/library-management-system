@@ -157,8 +157,13 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  text-align: right;
+  text-align: left !important;
   background-color: #fff;
+}
+.main-header {
+  margin-right: 0px;
+  transition: margin-right .3s ease-in-out;
+  margin-left: 250px;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -10372,7 +10377,7 @@ a.text-dark:hover, a.text-dark:focus {
   display: none;  /* Hide elements on page load */
 }
 .cl-ntfound{
-  color: red;
+  color: gray;
   text-align: center;
   background: white;
   width: 100%;
@@ -10384,6 +10389,16 @@ a.text-dark:hover, a.text-dark:focus {
   border: 1px solid #80808038;
   border-radius: 10px;
   box-shadow: 0px 0px 4px 0px #80808038;
+}
+.cl-ntfoundbook{
+  color: gray;
+  text-align: center;
+  background: white;
+  width: 100%;
+  padding: 20px;
+  font-size: 20px;
+  font-family: serif;
+  font-weight: 600;
 }
 .card-widget .btn-group{
   background-color: whitesmoke;
