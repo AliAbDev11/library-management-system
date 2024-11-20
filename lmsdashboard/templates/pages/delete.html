@@ -1,8 +1,8 @@
 {% extends 'base.html' %}
 {% block content %}
-    <div style="direction: rtl;" class="wrapper">
+    <div style="direction: ltr;" class="wrapper">
         <!-- Content Wrapper. Contains page content -->
-        <div   class="content-wrapper">
+        <div   class="content-wrapper p-4">
         <!-- Content Header (Page header) -->
         <div  class="card card-danger">
             <div class="card-header">
@@ -20,9 +20,10 @@
                 <!-- /.card-body -->
         
                 <div class="card-footer">
-                <button type="submit" class="btn btn-danger">حذف</button>
-        
-                <a href="{% url 'index' %}" type="button" class="btn btn-primary">Back</a>
+                    <div class="float-left">
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                        <a href="{% url 'index' %}" type="button" class="btn btn-secondary">Back</a>
+                    </div>
                 </div>
             </form>
             </div>
