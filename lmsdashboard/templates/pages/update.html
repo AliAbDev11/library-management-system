@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 {% block content %}
-<div style="direction: rtl;" class="wrapper">
+<div style="direction: ltr;" class="wrapper">
     
     <!-- Content Wrapper. Contains page content -->
-    <div   class="content-wrapper">
+    <div   class="content-wrapper p-4">
         <!-- Content Header (Page header) -->
-  <div  class="card card-primary">
-      <div class="card-header">
+  <div  class="card">
+      <div class="card-header bg-gradient-gray-dark">
         <h3 class="card-title">Update book</h3>
       </div>
       <!-- /.card-header -->
@@ -19,7 +19,10 @@
         <!-- /.card-body -->
   
         <div class="card-footer">
-          <button type="submit" class="btn btn-primary">Update</button>
+          <div class="float-left">
+            <button type="submit" class="btn btn-primary">Update</button>
+            <a href="{% url 'index' %}" type="button" class="btn btn-secondary">Back</a>
+        </div>
         </div>
       </form>
     </div>
