@@ -63,7 +63,7 @@
 
 .fa-ul {
   list-style-type: none;
-  margin-left: 2.5em;
+  margin-left: 0px;
   padding-left: 0; }
   .fa-ul > li {
     position: relative; }

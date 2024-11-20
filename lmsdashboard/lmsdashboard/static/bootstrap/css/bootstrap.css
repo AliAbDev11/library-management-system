@@ -157,8 +157,18 @@ body {
   font-weight: 400;
   line-height: 1.5;
   color: #212529;
-  text-align: right;
+  text-align: left !important;
   background-color: #fff;
+}
+body:not(.sidebar-mini-md) .content-wrapper, body:not(.sidebar-mini-md) .main-footer, body:not(.sidebar-mini-md) .main-header {
+  margin-right: 0px !important;
+  transition: margin-left .3s ease-in-out !important;
+  margin-left: 250px;
+}
+
+.sidebar-header.sidebar-mini.sidebar-collapse .content-wrapper, .sidebar-mini.sidebar-collapse .main-footer, .sidebar-mini.sidebar-collapse .main-header {
+  margin-left: 4.6rem !important;
+  margin-right: 0rem !important;
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4872,6 +4882,7 @@ input[type="button"].btn-block {
 }
 
 .card-title {
+  float: left !important;
   margin-bottom: 0.75rem;
 }
 
