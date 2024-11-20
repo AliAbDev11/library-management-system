@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% block content %}
-    <div style="direction: rtl;" class="wrapper">
+    <div style="direction: ltr;" class="wrapper">
     <!-- Content Wrapper. Contains page content -->
     <div   class="content-wrapper p-5">
       <!-- Content Header (Page header) -->
@@ -31,7 +31,7 @@
                         <div class="row">
                           <div class="col-7">
                             <h2 class="lead"><b>{{ book.title }}</b></h2>
-                            <ul class="fa-ul text-muted">
+                            <ul class="text-muted">
                               <li class="small"><span class="fa-li"></span>Status: {{ book.status }}</li>
                               {% if book.price %}
                               <li class="small"><span class="fa-li"></span>Price: {{ book.price }}</li>
