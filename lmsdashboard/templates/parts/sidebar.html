@@ -3,18 +3,18 @@
 <aside style="position: fixed;" class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="{% url 'index' %}" class="brand-link">
-        <span class="brand-text font-weight-light">LBS</span>
+        <span class="brand-text font-weight-light p-3">LBS</span>
     </a>
 
     <!-- Sidebar -->
     <div class="sidebar">
         <!-- Sidebar user panel (optional) -->
-        <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        {% comment %} <div class="user-panel mt-3 pb-3 mb-3 d-flex">
             <div class="image"></div>
             <div class="info">
-                <span class="d-block text-white">Ali AB</span>
+                <span class="d-block text-white">Ali Ait Brahim</span>
             </div>
-        </div>
+        </div> {% endcomment %}
 
         <!-- Sidebar Menu -->
         <nav class="mt-2">
@@ -22,15 +22,14 @@
                 <li class="nav-item">
                     <a href="{% url 'books' %}" class="nav-link">
                         <i class="nav-icon fas fa-th"></i>
-                        <p>New Books</p>
+                        <p>Books</p>
                     </a>
                 </li>
                 <li class="nav-item has-treeview">
                     <a href="#" class="nav-link">
                         <i class="nav-icon fas fa-copy"></i>
-                        <p>
-                            Category
-                            <i class="fas fa-angle-left right"></i>
+                        <p> Category
+                            <i class="fas fa-angle-right left"></i>
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
