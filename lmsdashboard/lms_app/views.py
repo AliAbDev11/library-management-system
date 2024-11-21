@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import *
 from .forms import BookForm, CategoryForm
+from django.contrib import messages
 
 # Create your views here.
 def base(request):
@@ -11,31 +12,33 @@ def index(request):
         add_book = BookForm(request.POST, request.FILES)
         add_category = CategoryForm(request.POST)
 
-        # Check if the book form is valid
         if add_book.is_valid():
             add_book.save()
-            return redirect('index')  # Redirect after successful book submission
-
-        # Check if the category form is valid
-        if add_category.is_valid():
+            messages.success(request, "Book added successfully!")
+        elif add_category.is_valid():
             add_category.save()
-            return redirect('index')  # Redirect after successful category submission
+            messages.success(request, "Category added successfully!")
+        else:
+            messages.error(request, "There were errors in the form submission.")
 
-    else:
-        add_book = BookForm()  # Initialize empty forms for GET request
-        add_category = CategoryForm()
+        return redirect('index')  # Redirect after processing the POST request
+
+    # Handle GET request
+    add_book = BookForm()
+    add_category = CategoryForm()
+    books = Book.objects.all()
 
     context = {
         'categories': Category.objects.all(),
-        'books': Book.objects.all(),
+        'books': books,
         'form': add_book,
         'CategoryForm': add_category,
-        'AllBooks': Book.objects.filter(active=True).count(),
-        'SoldBooks': Book.objects.filter(status='sold').count(),
-        'RentalBooks': Book.objects.filter(status='rental').count(),
-        'AvailableBooks': Book.objects.filter(status='available').count(),
+        'AllBooks': books.filter(active=True).count(),
+        'SoldBooks': books.filter(status='sold').count(),
+        'RentalBooks': books.filter(status='rental').count(),
+        'AvailableBooks': books.filter(status='available').count(),
     }
-    
+
     return render(request, 'pages/index.html', context)
 
 def books(request):
