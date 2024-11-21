@@ -109,6 +109,19 @@
             $(".bookhide").show(); // Show all books
             $("#noBooksMessage").hide(); // Hide 'No books found' message
         });
+        
+        $(".category-filter").click(function(event) {
+            event.preventDefault(); // Prevent default link behavior
+            const categoryId = $(this).data("category-id");
+            
+            if (categoryId === "all") {
+                $(".bookhide").show(); // Show all books
+            } else {
+                $(".bookhide").hide(); // Hide all books
+                $(`.book${categoryId}`).show(); // Show books in the selected category
+            }
+            checkIfBooksFound();
+        });
 
         // Execute the function on page load to handle initial book visibility
         checkIfBooksFound();
