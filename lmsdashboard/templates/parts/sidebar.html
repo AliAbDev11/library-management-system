@@ -33,28 +33,39 @@
                         </p>
                     </a>
                     <ul class="nav nav-treeview">
+                        <!-- Add New Category Button -->
                         <li class="nav-item">
                             <a id="addcat" href="#" class="nav-link">
-                                <i class="fa fa-plus "></i>
+                                <i class="fa fa-plus"></i>
                                 <p class="text-light"> Add New </p>
                             </a>
                         </li>
+                        
+                        <!-- Category Form (Initially hidden) -->
                         <form id="cat" method="POST">
                             {% csrf_token %}
-                            <div id="cl-category">
+                            <div id="cl-category" style="display: none;">
                                 {{ CategoryForm }}
-                                <button type="submit" class="btn btn-success">save</button>
-                                <button id="backcat" class="btn btn-primary ">back</button>
+                                <button type="submit" class="btn btn-success">Save</button>
+                                <button id="backcat" class="btn btn-primary">Back</button>
                             </div>
                         </form>
+                    
+                        <!-- Existing Categories List -->
                         {% for category in categories %}
-                        <li style="cursor: pointer;" class="nav-item category{{ category.id }}">
-                            <a class="nav-link">
+                        <li class="nav-item category{{ category.id }}">
+                            <a class="nav-link category-filter" href="#" data-category-id="{{ category.id }}">
                                 <i class="far fa-circle nav-icon"></i>
                                 <p>{{ category.name }}</p>
                             </a>
                         </li>
                         {% endfor %}
+                        <li class="nav-item">
+                            <a class="nav-link category-filter" href="#" data-category-id="all">
+                                <i class="far fa-circle nav-icon"></i>
+                                <p>Show All</p>
+                            </a>
+                        </li>
                     </ul>
                 </li>
 
@@ -80,7 +91,7 @@
                 <li style="cursor: pointer;" class="nav-item">
                     <a id="statusAll" class="nav-link">
                         <i class="nav-icon far fa-circle text-success"></i>
-                        <p>All</p>
+                        <p>Show All</p>
                     </a>
                 </li>
             </ul>
