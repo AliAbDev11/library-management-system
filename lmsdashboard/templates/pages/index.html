@@ -5,7 +5,7 @@
     <div   class="content-wrapper">
       <!-- Content Header (Page header) -->
   
-      <!--الاحصائيات-->
+      <!--Statistics-->
       <div class="content">
         <div class="container-fluid">
           <div class="row">
@@ -76,27 +76,30 @@
           
           <div id="bookform" class="card card-primary collapse">
             <div class="card-header bg-gradient-gray-dark">
-              <h3 class="card-title">Add book</h3>
+                <h3 class="card-title">Add book</h3>
             </div>
             <!-- /.card-header -->
             <!-- form start -->
             <form method="POST" enctype="multipart/form-data" class="cl-form">
-              {% csrf_token %}
-              {{ form.as_p }}  <!-- For BookForm -->
-              {% if form.errors %}
-                  <div class="alert alert-danger">
-                      <ul>
-                      {% for field in form %}
-                          {% for error in field.errors %}
-                              <li>{{ field.label }}: {{ error }}</li>
-                          {% endfor %}
-                      {% endfor %}
-                      </ul>
-                  </div>
-              {% endif %}
-              <button type="submit" class="btn btn-primary float-right">Add Book</button>
+                {% csrf_token %}
+                
+                <!-- Display form errors -->
+                {% if form.errors %}
+                    <div class="alert alert-danger">
+                        <h5>Please fix the following errors:</h5>
+                        <ul>
+                            {% for field, errors in form.errors.items %}
+                                <li>{{ field|capfirst }}: {{ errors|join:", " }}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+                
+                {{ form.as_p }}  <!-- For BookForm -->
+        
+                <button type="submit" class="btn btn-primary float-right">Add Book</button>
             </form>
-          </div>
+        </div>
 
                 <!-- /.card -->
           </div>
@@ -106,20 +109,28 @@
   
           <div class="row justify-content-center mb-3">
             <div class="col-6">
-              <ul class="nav">
-                {% for category in categories %}
-                <li class="nav-item category{{category.id}}">
-                  <a id="" class="nav-link bg-dark" href="#">{{category.name}}</a>
-                </li>
-                {% endfor %}
-              </ul>
+                <ul class="nav">
+                    {% for category in categories %}
+                    <li class="nav-item">
+                        <a 
+                            class="nav-link bg-dark category-filter" 
+                            href="#" 
+                            data-category-id="{{ category.id }}">
+                            {{ category.name }}
+                        </a>
+                    </li>
+                    {% endfor %}
+                    <li class="nav-item">
+                      <a class="nav-link bg-dark category-filter" href="#" data-category-id="all">Show All</a>
+                    </li>
+                </ul>
             </div>
-          </div>
+        </div>
           <!-- books -->
 
           <div class="row">
 
-          <!-- الكتب -->
+          <!-- books -->
             {% for book in books %}
               <div class="col-md-4 bookhide book{{ book.category.id }} book{{ book.status }}">
                   <div class="card card-widget widget-user">
